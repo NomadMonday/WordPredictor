@@ -38,3 +38,25 @@ Word Predictor was my capstone project for the John Hopkins University Data Scie
 - However, once initialized, the actual prediction is very fast. Locally tested using the system.time() function, the mean user time was just 0.0002 seconds. (Total user time to run over a test set of 167,619 sentence fragments was 28.17 seconds.)
 
 ## File Descriptions
+- 01_Exploratory_Analysis.R
+    - First, some exploratory analysis is performed. The data is read in and word frequency is explored.
+    - Since words that occur rarely are not useful to modeling and can create model bloat, various sample sizes were tested to find adequate coverage of most of the words without using them all.
+- 02_Create_Test_Train_Sets.R
+    - Source data is read in, then split into testing, training, and validation sets, and then written back out to files for use in subsequent steps.
+- 03_Modeling.R
+    - Model preparation is done here.
+    - Training data is read in, tokenized, and cleaned.
+    - Then, n-gram lookup tables are created and written to CSV files for use in our prediction model creation.
+- 04_PredictionModel.R
+    - The lookup tables are read in and converted to hash tables.
+    - The prediction function is created using the "backoff" method described above.
+- 05_Accuracy_Test.R
+    - Here, the test set is read in and the accuracy and speed of the prediction model is tested.
+- en_profanity.txt
+    - This is a list of profanity words that were used as a filter to "clean up" our model.
+    - https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words
+- Shiny\app.R
+    - This is the code for setting up the Shiny web application.
+    - Lookup tables were uploaded to the Shiny server and the prediction model from 04_PredictionModel.R was loaded into the server logic.
+    - https://nomadmonday.shinyapps.io/WordPredictor/
+
